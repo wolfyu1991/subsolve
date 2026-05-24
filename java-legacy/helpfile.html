@@ -1,0 +1,253 @@
+<html>
+<head>
+<title>Decrypto 8.5 Help</title>
+</head>
+
+<h1>Decrypto 8.5 Help</h1>
+(C) 2006-2008 by Edwin Olson<BR>
+eolson@mit.edu<br>
+
+<h2>1. Quickstart Guide</h2>
+
+<P>Type the encoded puzzle into the "Cipher Text" box. If you know any
+letter mappings (e.g., "A=R"), type those into the "Clues"
+box. Finally, click "Solve".</P>
+
+<P>There are several different solving options available from the
+popup menu near the "Solve" button:</P>
+
+<OL>
+
+<LI><B>Dictionary Attack.</B> Each ciphertext word is matched against a
+dictionary of English words, and possible matches are tried in
+turn. This method is very fast and highly effective when all (or
+nearly all) the cipherwords are in the dictionary. 
+
+<LI><B>Dictionary Attack++.</B> Identical to the previous option,
+except that the solver will be more aggressive. If the puzzle contains
+several non-dictionary words, this method can work better than the
+default dictionary attack.
+
+<LI><B>Genetic, trust spaces.</B> This genetic algorithm approach
+iteratively refines solutions by trying to maximize the probability of
+the solution based on the statistics of written English. (E.g., that
+"E" is a very common letter, that "TH" is a common 2-gram, etc.) The
+genetic approach works best on longer puzzles, and works well even if
+they contain many non-dictionary words. The "trust spaces" option
+indicates that word boundaries are assumed to be correct.
+
+<LI><B>Genetic, find spaces.</B> Like the previous option, except that
+word boundaries are not assumed to be known. Any spaces in the cipher
+text are automatically removed, and the solver attempts to find both
+the plaintext and the word boundaries. These types of puzzles are
+known as "patristocrats".
+</OL>
+
+<P>In most cases, Decrypto will completely solve the puzzle in a
+fraction of a second. Hard puzzles, in which there are several
+non-dictionary words, or that are very short (under 50 characters), or
+whose answers are statistically unlikely, can take somewhat
+longer. For dictionary attacks, a few minutes can occasionally be
+needed; the genetic methods can require 10 minutes or more. It's worth
+trying different methods, however: they have different strengths and
+weaknesses.</p>
+
+<P>On especially hard puzzles, you can guide Decrypto towards the correct
+solution. Even if Decrypto does not find a perfect answer, the guesses
+it produces can often give a human insight into the correct
+solution. Perhaps a word or two "look right". Use this observation to
+add new clues to the puzzle and run Decrypto again.</p>
+
+<P>For most cryptograms (in which word boundaries are known), the
+dictionary attack options are generally the most successful. If the
+default method does not work, switching to "Dictionary Attack++" or
+"Genetic, trust spaces" will generally yield a usable answer.</P>
+
+<h2>2. Narrowing the search</h2>
+
+<P>Often, Decrypto can solve puzzles without any clues. On hard
+puzzles, though, clues can make an important difference. There are
+several ways of specifying clues.</P>
+
+<P><table border=1 cellpadding=5>
+<tr><td><tt>Q=R W=A B=C</tt>
+<td>Tells Decrypto that Q must equal R, W must equal A, and B must
+equal C.
+
+<tr><td><tt>QWB=RAC</tt><td>Same as above.
+
+<tr><td><tt>Q!=D</tt><td>Q is <I>not</I> equal to D.
+
+<tr><td><tt>Q!=DEF</tt><td>Q is neither D, E, nor F.
+
+<tr><td><tt>QWB!=DEF</tt><td>Q is not D, W is not E, B is not F.
+</table>
+
+<P>If there are words which should <I>not</I> be considered while solving
+(because they might not be in the dictionary), include a carat ("^")
+in front of the word in the ciphertext box. This is particularly
+useful when you can guess which words might be proper nouns (such as a
+quote).</P>
+
+<P>If you know that the puzzle contains no identity-mappings (i.e., no
+letters map to themselves), you could specify the clue
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ!=ABCDEFGHIJKLMNOPQRSTUVWXYZ", or more
+easily, deselect the "allow identity mappings when solving" option
+from the Advanced menu.</P>
+
+<h2>3. Picking a dictionary</h2>
+
+<P>You can pick a new dictionary by using the Dictionary menu. Note
+that the selected dictionary only significantly affects the dictionary
+based methods. (The genetic algorithms do not make significant use of
+the dictionary).</p>
+
+<P>The standard English dictionary is good for a wide variety of
+puzzles, however there are occasions where a different dictionary will
+perform better. On very short puzzles that (probably) contain only
+common words, smaller dictionaries will reduce the number of "false
+positives" while simultaneously decreasing the time required to
+search. On puzzles containing uncommon words (including names and
+acronyms), larger dictionaries are generally better.</P>
+
+<h2>4. Creating puzzles</h2>
+
+<P>Type the unencoded puzzle into the "Cipher Text" box. Enter any
+clues that you would to provide. (Since you're providing the
+undeciphered puzzle in the "Cipher Text" box, you should enter clues
+like "R=R", or "RACER=RACER". After encoding, the clues box will
+updated accordingly.)</P>
+
+<P>Click scramble. You can hit scramble as many times as you like
+until you get a permutation that you like. By default, the encoding
+process will prevent a letter from ever mapping to itself. This can be
+changed by deselecting the "allow identity mappings while encoding"
+option from the Advanced menu.</P>
+
+<h2>5. Modifying the dictionary</h2>
+
+<P>From the Dictionary menu, select "Dictionary Editor...". This will
+allow you to merge dictionary files and word lists in order to create
+new dictionaries. While you can add words using the editor, using an
+external editor (like Notepad) is generally easier. You can then
+import the whole file in one operation. Plus, if you save your
+additions to a separate file, you can send them to me to be included
+in a future release of Decrypto.</P>
+
+<P>Notes: A word list is just a newline-terminated list of words,
+which you can create in any editor. Also, do not change the "Language
+Class" setting unless you know what you're doing!</P>
+
+<P>If you find any words that are missing from the standard
+dictionary, please email me them (eolson@mit.edu) and I will add those
+words to the next version.</P>
+
+<h2>6. Supporting other languages</h2>
+
+<P>Decrypto 8.5 supports puzzles in multiple languages, at least in
+theory. However, I have only built the appropriate data files for
+English. Supporting new languages requires a very large corpus of
+sample text, a dictionary file, and a small amount of programming
+know-how (which I could help you with). Please contact me if you are
+interested in helping.</P>
+
+<P><B>Important:</B> Creating good dictionaries is hard work. Too few
+words and the solver won't find good solutions. Too many words (i.e.,
+if you just use a spell-checking dictionary filled with acronyms,
+colloquialisms, and other nonsense), and you'll get gibberish. As a
+general strategy, be sparing when adding words, and definitely do not
+indiscriminately merge the dictionary with another large word
+list.</P>
+
+<h2>7. Advanced Options</h2>
+
+<P>The advanced menu includes several options that may be of interest to
+advanced users. These options are all set to reasonable values,
+however, so most users won't need to modify any settings.</P>
+
+<P><B>Identity mappings</B>, in which a ciphertext letter maps to the same
+plaintext letter (e.g., "R=R"), can be disabled both when encoding and
+decoding puzzles. When decoding puzzles, disabling identity mappings
+can provide a noticeable increase in speed-- however, the algorithm
+obviously will not work if the solution requires an identity mapping!</P>
+
+<P><B>Fewer Tildes in Solutions</B>. When Decrypto's dictionary
+attacks reach a "dead-end" when solving (when a ciphertext word cannot
+be mapped to a dictionary word while respecting the current set of
+mappings), there are often several mappings have not yet been
+determined. These unknown letters are displayed as tildes ('~'). As of
+version 8.5, Decrypto includes an algorithm that attempts to guess
+these last few mappings based purely on statistics. When this option
+is selected, this algorithm will be used when the number of unknown
+mappings is relatively small.</P>
+
+<P><B>Only allow dictionary words</B>. When using the dictionary-based
+attacks, Decrypto usually employs a number of techniques for dealing
+with words that do not appear in the dictionary, increasing the number
+of puzzles that Decrypto can solve. This option disables this
+behavior: only solutions containing only dictionary words will be
+reported.</P>
+
+<P><B>Maximum Solutions</B>. By default, Decrypto will track the 500
+best-scoring solutions (based on their 4-gram probabilities). The
+number of retained solutions can be modified using this menu.</P>
+
+<P><B>Testing Options</B>. These options are where various debugging
+options are hidden. They are not intended for users; they may or may
+not do anything.</P>
+
+<h2>8. Examples</h2>
+
+<P>Cipher text: "PG XOYHLM XOYLY PZ GH TPUUYLYGRY EYXBYYG XOYHLM WGT JLWRXPRY. PG JLWRXPRY, XOYLY PZ." - MHIP EYLLW</P>
+
+<P>Clues: X=T M=Y</P>
+
+<h2>9. Source Code</h2>
+
+<P>The source code for this software is available from the Decrypto homepage:</P>
+
+<P>http://www.blisstonia.com/software/Decrypto</P>
+
+<P>It is distributed under the terms of the GPL version 2. I welcome
+patches and improvements!</P>
+
+<h2>10. Acknowledgements</h2>
+
+<P>Pete Wiedman did a great deal of work in preparing the excellent
+dictionaries which come with Decrypto 8.x, not to mention lots of
+invaluable testing. Also, thanks to John Gidusko for his part in
+preparing the dictionaries. Thanks!</P>
+
+<P>Ken Cline made the helpful observation that--occasionally--it is
+more productive to search for a single letter at a time than to search
+for a whole word. This has made a significant performance improvement
+on a class of difficult puzzles.</P>
+
+<h2>11. How it works</h2>
+
+<P>Dictionary attack methods are the classic method of solving
+cryptograms, but the method used by Decrypto 8.x contains several
+critical refinements. These refinements are described in a paper
+published in the journal Cryptologia in 2007. You can download the
+paper here:
+http://edwinolson.org/papers/cryptologia2007/eolson_decrypto2007.pdf
+</p>
+
+<P>The genetic algorithm idea is similar to work by [Spillman, et al
+1993]. I have attempted to make it smarter in various ways, but the
+performance of this genetic algorithm--like other genetic approaches--
+tends to be spotty. I have modified the searching in an attempt to
+make it less likely to get stuck in local minima. However, more
+research is required here.</P>
+
+<h2>12. Contributions</H2>
+
+<P>This program has taken a lot of time to develop. If you would like
+  to contribute a pizza+coke for one more night of hacking, please
+  consider using PayPal (www.paypal.com). I am registered on PayPal as
+  "eolson@mit.edu". If you do not use paypal, please contact me for a
+  mailing address!
+
+<P>Thanks to those who have already contributed!</P>
+
+</html>
